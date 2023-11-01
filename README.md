@@ -1,1 +1,3 @@
-# HarjoitusRepo moi
+# Connect Four-peli
+
+
