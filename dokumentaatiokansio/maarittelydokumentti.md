@@ -10,7 +10,7 @@ Toteutan Connect Four-peli, johon käytän minimax-algoritmia.
 
 ## Ohjelman saamat syötteet
 
-Käyttäjä syöttää mille riville hän haluaa sijoittaa nappulan. Rivejä on 6 eli käyttäjä voi syöttää jonkin numeroista 1, 2, 3, 4, 5 tai 6.
+Käyttäjä syöttää mille riville hän haluaa sijoittaa nappulan. Rivejä on 7 eli käyttäjä voi syöttää jonkin numeroista 1, 2, 3, 4, 5, 6 tai 7.
 
 ## Aika- ja tilavaativuudet
 
