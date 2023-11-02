@@ -2,7 +2,7 @@
 
 ## Mitä olen tällä viikolla tehnyt?
 
-Olen perehtynyt käyttämääni algoritmiin, tehnyt määrittelydokumenttia, luonut projektin. Olen käyttänyt projektiin noin 10 tuntia.
+Olen perehtynyt käyttämääni algoritmiin, tehnyt määrittelydokumenttia, luonut projektin, tutustunut kurssimateriaaliin. Olen käyttänyt projektiin noin 10 tuntia.
 
 ## Miten ohjelma on edistynyt?
 
