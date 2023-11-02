@@ -2,10 +2,20 @@
 
 ## Mitä olen tällä viikolla tehnyt?
 
-## Miten ohjlema on edistynyt?
+Olen perehtynyt käyttämääni algoritmiin, tehnyt määrittelydokumenttia, luonut projektin. Olen käyttänyt projektiin noin 10 tuntia.
+
+## Miten ohjelma on edistynyt?
+
+En aloittanut vielä tällä viikolla kunnolla ohjelman tekoa. Loin vain projektin ja tein alustavia toimenpiteitä (git). 
 
 ## Mitä opin tällä viikolla?
 
+Opin minimax-algoritmista.
+
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
+Algoritmien toiminta on ollut itselle vaikeaa ymmärtää. En vielä ymmärtänyt täysin, miten toteutan minimax-algoritimia omassa pelissäni. 
+
 ## Mitä teen seuraavaksi?
+
+Ensi viikolla alan tekemään koodia ja vielä enemmän perehdyn minimax-algoritmiin, tällä viikolla ei ollut aikaa paneutua kunnolla.
