@@ -14,7 +14,7 @@ Opin minimax-algoritmista.
 
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
-Algoritmien toiminta on ollut itselle vaikeaa ymmärtää. En vielä ymmärtänyt täysin, miten toteutan minimax-algoritimia omassa pelissäni. 
+Algoritmien toiminta on ollut itselle vaikeaa ymmärtää. En vielä ymmärtänyt täysin, miten toteutan minimax-algoritimia omassa pelissäni. On myös vaikea aloittaa projektin tekeminen tyhjästä, miten muodostaa järkevästi kansiot ja miten jakaa koodit tiedostoihin...
 
 ## Mitä teen seuraavaksi?
 
