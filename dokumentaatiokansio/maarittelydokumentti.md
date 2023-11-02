@@ -6,9 +6,11 @@ Käytän ohjelmointikielenä Pythonia, joka on ainut kieli jota hallitsen. Proje
 
 ## Algoritmit ja tietorakenteet
 
-Käytän minimax-algoritmia.
+Toteutan Connect Four-peli, johon käytän minimax-algoritmia.
 
 ## Ohjelman saamat syötteet
+
+Käyttäjä syöttää mille riville hän haluaa sijoittaa nappulan.
 
 ## Aika- ja tilavaativuudet
 
