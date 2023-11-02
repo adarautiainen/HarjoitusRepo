@@ -6,7 +6,7 @@ Olen perehtynyt käyttämääni algoritmiin, tehnyt määrittelydokumenttia, luo
 
 ## Miten ohjelma on edistynyt?
 
-En aloittanut vielä tällä viikolla kunnolla ohjelman tekoa. Loin vain projektin ja tein alustavia toimenpiteitä (git). 
+En aloittanut vielä tällä viikolla kunnolla ohjelman tekoa. Loin vain projektin ja alustin versionhallinnan (GitHub). 
 
 ## Mitä opin tällä viikolla?
 
