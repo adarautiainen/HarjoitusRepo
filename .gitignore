@@ -1,0 +1,7 @@
+.idea/
+.coverage
+htmlcov
+.DS_Store
+*.tmp
+__pycache__
+.pytest_cache
