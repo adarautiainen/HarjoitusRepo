@@ -2,7 +2,7 @@
 
 ## Ohjelmointikieli ja projektin kieli
 
-Käytän ohjelmointikielenä Pythonia, joka on ainut kieli jonka hallitsen. Projektin kielenä käytän suomea.
+Käytän ohjelmointikielenä Pythonia, joka on ainut kieli jonka hallitsen. Käytän dokumentointiin suomea, mutta koodauksessa englantia.
 
 ## Algoritmit ja tietorakenteet
 
