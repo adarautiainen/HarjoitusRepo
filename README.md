@@ -6,7 +6,7 @@ Projekti on tehty Helsingin yliopiston kurssille Algoritmit ja tekoäly.
 
 ## Testauskattavuus
 
-https://github.com/adarautiainen/HarjoitusRepo/workflows/CI/badge.svg
+![workflow badge](https://github.com/adarautiainen/HarjoitusRepo/workflows/CI/badge.svg)
 
 ## Viikkoraportit
 
