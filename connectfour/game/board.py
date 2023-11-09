@@ -11,7 +11,7 @@ class GameBoard:
         print(" ".join(str(i + 1) for i in range(self.columns)))
 
     def check_valid_move(self, column):
-        result = 1 <= column <= self.columns and self.board[0][column - 1] == ' '
+        result = 0 <= column <= self.columns and self.board[0][column - 1] == ' '
         return result
 
     def make_move(self, column, symbol):
