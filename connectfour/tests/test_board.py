@@ -11,7 +11,7 @@ class TestGameBoard(unittest.TestCase):
         board = GameBoard()
         self.assertTrue(board.check_valid_move(6))  # valid move in column
         self.assertTrue(board.check_valid_move(3))  # valid move -||-
-        self.assertFalse(board.check_valid_move(1))  # invalid move -||- !!tää epäonnistuu!!
+        self.assertFalse(board.check_valid_move(1))  # invalid move -||-
         self.assertFalse(board.check_valid_move(8))  # invalid move -||-
 
     def test_make_move(self):
