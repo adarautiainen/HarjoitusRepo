@@ -22,6 +22,8 @@ jobs:
         run: poetry install
       - name: Install Coverage
         run: poetry run pip install coverage
+      - name: Install pytest
+        run: poetry run pip install pytest
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
       - name: Coverage report
