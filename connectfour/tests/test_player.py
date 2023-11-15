@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from connectfour.game.player import Player
 from connectfour.game.board import GameBoard
 
@@ -8,11 +9,28 @@ class TestPlayer(unittest.TestCase):
         self.player = Player('X')
         self.board = GameBoard()
 
-    # def test_make_move(self):
-    # print("Before move:")
-    # self.board.display_board()
-    #  self.assertTrue(self.player.make_move(1, self.board))
-    #  print("After move:")
-    #  self.assertEqual(self.board.board[5][0], 'X')
-    # self.assertFalse(self.player.make_move(1, self.board)) # testing invalid move (column filled)
-    # self.assertFalse(self.player.make_move((8, self.board))) # testing invalid move (invalid column)
+    @patch('builtins.input', return_value='3')
+    def test_user_input(self, mock_input):
+        user_input = self.player.user_input(self.board)
+        self.assertEqual(user_input, 3)
+
+    @patch('random.choice', return_value=4)
+    def test_ai_move(self, choice):
+        ai_move = self.player.ai_move(self.board)
+        self.assertEqual(ai_move, 4)
+
+    @patch('builtins.input', return_value='2')
+    def test_make_move(self, mock_input):
+        move = self.player.make_move(self.board)
+        self.assertEqual(move, 2)
+
+    @patch('random.choice', return_value=3)
+    def test_make_ai_move(self, mock_choice):
+        self.player.is_ai = True
+        move = self.player.make_ai_move(self.board)
+        self.assertEqual(move, 3)
+
+
+if __name__ == '__main__':
+    unittest.main()
+
