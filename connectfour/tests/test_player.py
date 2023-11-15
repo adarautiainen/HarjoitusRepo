@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
-from game.player import Player
-from game.board import GameBoard
+from connectfour.game.player import Player
+from connectfour.game.board import GameBoard
 
 
 class TestPlayer(unittest.TestCase):
