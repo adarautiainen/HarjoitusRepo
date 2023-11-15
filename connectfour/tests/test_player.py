@@ -23,7 +23,8 @@ class TestPlayer(unittest.TestCase):
     def test_make_move(self, mock_input):
         column = int(mock_input.return_value)
         move = self.player.make_move(column, self.board)
-        self.assertEqual(move, 2)
+        self.assertTrue(move)
+        self.assertEqual(self.board.board[5][1], 'X')
 
     @patch('random.choice', return_value=3)
     def test_make_ai_move(self, mock_choice):
