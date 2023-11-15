@@ -10,8 +10,8 @@ class TestGameBoard(unittest.TestCase):
     def test_valid_move(self):
         board = GameBoard()
         self.assertTrue(board.check_valid_move(6))  # valid move in column
-        self.assertTrue(board.check_valid_move(3))  # valid move -||-
-        self.assertFalse(board.check_valid_move(1))  # invalid move -||-
+        self.assertTrue(board.check_valid_move(1))  # valid move -||-
+        self.assertFalse(board.check_valid_move(0))  # valid move -||-
         self.assertFalse(board.check_valid_move(8))  # invalid move -||-
 
     def test_make_move(self):
