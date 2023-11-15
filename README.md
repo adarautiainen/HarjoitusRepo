@@ -5,6 +5,7 @@ Projekti on tehty Helsingin yliopiston kurssille Algoritmit ja tekoäly.
 ## Dokumentaatio
 
 - [Määrittelydokumentti](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/maarittelydokumentti.md)
+- [Testausdokumentti](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/testausdokumentti.md)
 
 ## Viikkoraportit
 
