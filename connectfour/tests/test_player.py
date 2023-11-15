@@ -21,7 +21,8 @@ class TestPlayer(unittest.TestCase):
 
     @patch('builtins.input', return_value='2')
     def test_make_move(self, mock_input):
-        move = self.player.make_move(self.board)
+        column = int(mock_input.return_value)
+        move = self.player.make_move(column, self.board)
         self.assertEqual(move, 2)
 
     @patch('random.choice', return_value=3)
