@@ -1,5 +1,5 @@
 import unittest
-from connectfour.game.board import GameBoard
+from game.board import GameBoard
 
 
 class TestGameBoard(unittest.TestCase):
