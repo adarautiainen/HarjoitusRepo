@@ -26,7 +26,7 @@ class Player:
 
     def make_ai_move(self, board):
         if self.is_ai:
-            return  self.ai_move(board)
+            return self.ai_move(board)
         else:
             return self.user_input(board)
 
