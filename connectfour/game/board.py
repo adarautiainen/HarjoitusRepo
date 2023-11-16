@@ -46,3 +46,6 @@ class GameBoard:
                     return True
 
         return False
+
+    def is_board_full(self):
+        return all(cell != ' ' for row in self.board for cell in row)
