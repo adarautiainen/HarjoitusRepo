@@ -1,5 +1,5 @@
 import random
-from game.board import GameBoard
+from connectfour.game.board import GameBoard
 
 class Player:
     def __init__(self, symbol, is_ai=False):
