@@ -2,7 +2,7 @@
 
 ## Mitä olen tällä viikolla tehnyt? / Miten ohjelma on edistynyt?
 
-Olen saanut tällä viikolla tehtyä pelin niin, että ihmispelaaja pystyy pelaamaan tietokonetta vastaan. Tällä hetkellä tietokone ei käytä minimax-algoritmia tai alfa-beta-karsintaa. Aloitin myös jo hieman minimax-algoritmin tekoa. Olen käyttänyt projektiin noin 10 tuntia.
+Olen saanut tällä viikolla tehtyä pelin niin, että ihmispelaaja pystyy pelaamaan tietokonetta vastaan. Tällä hetkellä tietokone ei käytä minimax-algoritmia tai alfa-beta-karsintaa. Aloitin myös jo hieman minimax-algoritmin tekoa. Olen käyttänyt projektiin noin 15 tuntia.
 
 ## Mitä opin tällä viikolla?
 
