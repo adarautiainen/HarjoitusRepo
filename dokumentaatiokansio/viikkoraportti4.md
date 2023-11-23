@@ -6,7 +6,7 @@ Tällä viikolla ohjelma ei oikein edistynyt, kun oli paljon muuta opiskeltavaa,
 
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
-Vaikeuksia on tuottanut minimax algoritmin toteutus.
+Vaikeuksia on tuottanut minimax algoritmin toteutus. En ole täysin ymmärtänyt, miten saisin algoritmin toteutettua ja onko minulla nyt oleva luokkarakenne/metodit/koodin jakaminen järkevä tapa tähän vai kannattaisko yrittää tehdä eri tavalla. 
 
 ## Mitä teen seuraavaksi?
 
