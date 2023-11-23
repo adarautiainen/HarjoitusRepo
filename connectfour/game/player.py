@@ -1,6 +1,6 @@
 import random
 from copy import deepcopy
-from board import GameBoard
+from connectfour.game.board import GameBoard
 
 
 class Player:
