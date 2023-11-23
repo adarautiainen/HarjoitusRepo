@@ -2,7 +2,7 @@
 
 ## Mitä olen tällä viikolla tehnyt? / Miten ohjelma on edistynyt?
 
-Tällä viikolla ohjelma ei oikein edistynyt, kun oli paljon muuta opiskeltavaa, niin projekti jäi taka-alalle. Olen käyttänyt projektiin noin 10 tuntia.
+Tällä viikolla ohjelma ei oikein edistynyt, kun oli paljon muuta opiskeltavaa, niin projekti jäi taka-alalle. Sain tehtyä docstring-kommentointia koodille. Olen käyttänyt projektiin noin 10 tuntia.
 
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
