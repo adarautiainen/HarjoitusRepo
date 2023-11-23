@@ -1,6 +1,6 @@
 import random
 from copy import deepcopy
-from game.board import GameBoard
+from board import GameBoard
 
 
 class Player:
