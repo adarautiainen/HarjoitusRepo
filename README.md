@@ -14,6 +14,7 @@ Projekti on tehty Helsingin yliopiston kurssille Algoritmit ja tekoäly.
 - [Viikkoraportti 2](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/viikkoraportti2.md)
 - [Viikkoraportti 3](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/viikkoraportti3.md)
 - [Viikkoraportti 4](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/viikkoraportti4.md)
+- [Viikkoraportti 5](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/viikkoraportti5.md)
 
 ## Testauskattavuus
 
