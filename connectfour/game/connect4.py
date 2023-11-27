@@ -288,7 +288,7 @@ class ConnectFour():
 
 
 if __name__ == "__main__":
-    player1 = HumanPlayer("Human1", "X", "\033[32m")
+    player1 = HumanPlayer("Human", "X", "\033[32m")
     computer = ComputerPlayer("Computer", "O", "\033[31m")
     game = ConnectFour(player1, computer)
     game.run()
