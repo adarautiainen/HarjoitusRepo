@@ -39,8 +39,10 @@ class Player:
         """
         while True:
             try:
-                column = int(input(f"Player {self.symbol}, enter the column (1-{board.columns}): "))
-                if 1 <= column <= board.columns and board.check_valid_move(column):
+                column = int(input(f"Player {self.symbol},"
+                                   f" enter the column (1-{board.columns}): "))
+                if 1 <= column <= board.columns \
+                        and board.check_valid_move(column):
                     return column
                 else:
                     print("Invalid move!")
@@ -57,7 +59,8 @@ class Player:
         Returns:
             int: valittu sarake
         """
-        vcolumns = [col for col in range(1, board.columns + 1) if board.check_valid_move(col)]
+        vcolumns = [col for col in range(1, board.columns + 1)
+                    if board.check_valid_move(col)]
         return random.choice(vcolumns) if vcolumns else None
         #return self.make_ai_move(board)
 
@@ -75,10 +78,12 @@ class Player:
         return 'O' if self.symbol == 'X' else 'X'
 
     def minimax_move(self, board, depth, alpha, beta, maximizing):
-        if depth == 0 or board.winner_check(self.symbol) or board.winner_check(self.opponent_symbol()):
+        if depth == 0 or board.winner_check(self.symbol)\
+                or board.winner_check(self.opponent_symbol()):
             return self.evaluate(board)
 
-        valid_columns = [col for col in range(1, board.columns + 1) if board.check_valid_move(col)]
+        valid_columns = [col for col in range(1, board.columns + 1)
+                         if board.check_valid_move(col)]
 
         if maximizing:
             max_evaluate = float('-inf')

@@ -3,7 +3,7 @@ import copy
 import math
 
 
-def minimax(board: Board, player: Player, max_depth, current_depth) -> (float, Move):
+def minimax(board: Board, player: Player, max_depth, current_depth):
     if board.is_game_over() or current_depth == max_depth:
         if board.is_game_over():
             if board.check_winner(player):
@@ -51,7 +51,7 @@ class Board:
 
         self.board = [[None for _ in range(Board.columns)] for _ in range(Board.rows)]
 
-    def get_moves(self) -> list[Move]:
+    def get_moves(self):
         valid_moves = []
         for col in range(Board.columns):
             if self.board[0][col] is None:
@@ -63,7 +63,7 @@ class Board:
             if self.board[row][col] is None:
                 return row
 
-    def make_move(self, move: Move) -> Board:
+    def make_move(self, move: Move):
         new_board = copy.copy(self)
         new_board.board = copy.deepcopy(self.board)
 
@@ -73,7 +73,7 @@ class Board:
 
         return new_board
 
-    def evaluate(self, player: Player) -> float:
+    def evaluate(self, player: Player):
         score = 0
 
         # horizontal
@@ -138,7 +138,7 @@ class Board:
 
         return score
 
-    def current_player(self) -> Player:
+    def current_player(self):
         return self.active_player
 
     def switch_player(self):
@@ -147,7 +147,7 @@ class Board:
         else:
             self.active_player = self.player1
 
-    def is_game_over(self) -> bool:
+    def is_game_over(self):
         for player in [self.player1, self.player2]:
             if self.check_winner(player):
                 return True
@@ -157,7 +157,7 @@ class Board:
 
         return False
 
-    def check_winner(self, player: Player) -> bool:
+    def check_winner(self, player: Player):
         symbol = player.get_symbol()
 
         # horizontal check
@@ -222,7 +222,7 @@ class Player:
     def get_color(self):
         return self.color
 
-    def get_move(self, board: Board) -> Move:
+    def get_move(self, board: Board):
         pass
 
 
@@ -231,7 +231,7 @@ class HumanPlayer(Player):
     def __init__(self, name, symbol, color):
         super().__init__(name, symbol, color)
 
-    def get_move(self, board: Board) -> Move:
+    def get_move(self, board: Board):
         valid_moves = board.get_moves()
         valid_columns = [move.get_column() + 1 for move in valid_moves]
 
@@ -252,7 +252,7 @@ class ComputerPlayer(Player):
     def __init__(self, name, symbol, color):
         super().__init__(name, symbol, color)
 
-    def get_move(self, board: Board) -> Move:
+    def get_move(self, board: Board):
         score, move = minimax(board, self, 5, 0)
         print("{} plays {} with score {}".format(self.name, move.get_column() + 1, score))
         return move
@@ -263,10 +263,10 @@ class Move:
         self.player = player
         self.column = column
 
-    def get_column(self) -> int:
+    def get_column(self):
         return self.column
 
-    def get_player(self) -> Player:
+    def get_player(self):
         return self.player
 
 

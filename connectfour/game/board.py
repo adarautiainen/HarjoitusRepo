@@ -31,7 +31,8 @@ class GameBoard:
             bool: True, jos siirto kelvollinen, jos ei niin False
         """
 
-        result = 1 <= column <= self.columns and self.board[0][column - 1] == ' '
+        result = 1 <= column <= self.columns \
+                 and self.board[0][column - 1] == ' '
         return result
 
     def make_move(self, column, symbol):
