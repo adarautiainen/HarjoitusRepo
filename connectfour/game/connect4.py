@@ -8,7 +8,7 @@ def minimax(board: Board, player: Player, max_depth, current_depth):
         if board.is_game_over():
             if board.check_winner(player):
                 return math.inf, None
-            elif not board.check_winner(player):
+            if not board.check_winner(player):
                 return -math.inf, None
             else:
                 return 0, None
@@ -167,21 +167,24 @@ class Board:
 
         # vertical check
         for column in range(Board.columns):
-            if f"{symbol * 4}" in "".join(str(row[column]) if row[column] is not None else '' for row in self.board):
+            if f"{symbol * 4}" in "".join(str(row[column]) if row[column] is not None
+                                          else '' for row in self.board):
                 return True
 
         # diagonal check left->right
         for i in range(Board.rows - 3):
             for j in range(Board.columns - 3):
-                if all(str(self.board[i + k][j + k]) == symbol if self.board[i + k][j + k] is not None else '' for k in
+                if all(str(self.board[i + k][j + k]) == symbol if self.board[i + k][j + k]
+                                                                  is not None else '' for k in
                        range(4)):
                     return True
 
         # diagonal check right->left
         for i in range(3, Board.rows):
             for j in range(Board.columns - 3):
-                if all(str(self.board[i - k][j + k]) == symbol if self.board[i - k][j + k] is not None else '' for k in
-                       range(4)):
+                if all(str(self.board[i - k][j + k]) == symbol if self.board[i - k][j + k]
+                                                                  is not None else '' for k
+                       in range(4)):
                     return True
 
         return False
