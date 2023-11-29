@@ -10,8 +10,8 @@ Aloitin ohjelman rakenteen alusta, koska minulla oli vaikeuksia laajentaa aiempa
 
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
-Vaikeuksia tuotti koodin jakaminen tiedostoihin, jonka takia koko koodi on nyt yhdessä tiedostossa. Kun koodi oli jaettuna eri tiedostoihin tuli erroria "cannot import name from partially initialized module (most likely due to a circular import)"
+Vaikeuksia tuotti koodin jakaminen tiedostoihin, jonka takia koko koodi on nyt yhdessä tiedostossa. Kun koodi oli jaettuna eri tiedostoihin tuli erroria "cannot import name from partially initialized module (most likely due to a circular import)". 
 
 ## Mitä teen seuraavaksi?
 
-Seuraavaksi teen testejä uudelle koodille ja lisään alpha-beta-karsinnan. Löytämässäni kirjassa oli luku myös alpha-beta-karsinnasta, jota en vielä lukenut, mutta voi olla, että saisin siitä apua toteuttamiseen.
+Seuraavaksi teen testejä uudelle koodille ja lisään alpha-beta-karsinnan. Löytämässäni kirjassa oli luku myös alpha-beta-karsinnasta, jota en vielä lukenut, mutta voi olla, että saisin siitä apua toteuttamiseen. Voittajan tarkistus ei tällä hetkellä toimi oikein, joten se pitää korjata.
