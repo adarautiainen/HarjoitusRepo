@@ -4,6 +4,7 @@ Projekti on tehty Helsingin yliopiston kurssille Algoritmit ja tekoäly.
 
 ## Dokumentaatio
 
+- [Käyttöohje](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/kaytto-ohje.md)
 - [Määrittelydokumentti](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/maarittelydokumentti.md)
 - [Testausdokumentti](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/testausdokumentti.md)
 - [Toteutusdokumentti](https://github.com/adarautiainen/HarjoitusRepo/blob/main/dokumentaatiokansio/toteutusdokumentti.md)
