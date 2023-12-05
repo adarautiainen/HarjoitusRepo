@@ -2,6 +2,68 @@ from __future__ import annotations
 import copy
 import math
 
+# minimax pitää olla edellinen siirto tiedossa
+# vaiha check winner palautus muuhun kuin inf
+# ota pois player luokka käytä totuusarvoa
+# ota pois current_player myös
+# pseudokoodilla
+# tee wikipedian mukaan maxiiming true ja false kun mini
+# ensin tarkista pelaajan voitto ja plauata paluuarvo
+# palauta paluuarvo ja perään jos syvyys savuutettu
+# 1 max ja -1 min jos voitto return (voittoarvo) player*1000
+# kun kutstutaan minimax -player saadaan , jos 1 ja -1 arvot tai sitten true ja false
+# jos et käytät syvyysarvoa niin ei tartte maxdepth, eli sitten verrataan syvyyttä nollaan
+# ei väliä kumpaa käyttää
+# käytä jälkimmäistä
+# muuta minimax wikipedian mukaiseks alphabetapruning,
+# ei player oliota
+# laudassa ei tietoa kumman vuoro on
+# tee uusiks voitto tarkistus
+# 7 depth on jo vaikea ihmiselle
+# tee testejä!
+
+
+"""
+def minimax_with_alphabeta(board: Board, player: Player, max_depth, current_depth, alpha, beta):
+" checkkaa eka voitto eli checkwinner ei näin montaa board.isgameover checkiä
+
+    if board.is_game_over() or current_depth == max_depth:
+        if board.is_game_over():
+            if board.check_winner(player):
+                return math.inf, None
+            if not board.check_winner(player):
+                return -math.inf, None
+            else:
+                return 0, None
+        else:
+            return board.evaluate(player), None
+    
+    if board.current_player() == player:
+        best_score = -math.inf
+    else:
+        best_score = math.inf
+
+    best_move = None
+    for move in board.get_moves():
+        new_board = board.make_move(move)
+        new_board.switch_player()
+
+        # recurse
+        current_score, current_move = minimax(new_board, player, max_depth, current_depth + 1)
+
+        if board.current_player() == player:
+            if current_score > best_score:
+                best_score = current_score
+                best_move = move
+        else:
+            if current_score < best_score:
+                best_score = current_score
+                best_move = move
+
+    return best_score, best_move
+
+"""
+
 
 def minimax(board: Board, player: Player, max_depth, current_depth):
     if board.is_game_over() or current_depth == max_depth:
@@ -25,7 +87,7 @@ def minimax(board: Board, player: Player, max_depth, current_depth):
         new_board = board.make_move(move)
         new_board.switch_player()
 
-        # recurse
+        # recurse # toinen pelaaja saadaan !player
         current_score, current_move = minimax(new_board, player, max_depth, current_depth + 1)
 
         if board.current_player() == player:
@@ -116,7 +178,15 @@ class Board:
         opponent_count = window.count(opponent)
         empty_count = window.count(None)
 
+        # tarkista nää ja tee testit
         # highest score for four in a row
+        # tää on turha mikä laskee 4, koska peli jo ohi
+        # kannattaa tarkistaa jos on kolme horizontal ja molemmat tyhjii -> varma voitto,
+        # aina kun on kaksi niin jonkin arvonen
+        # jos x.x niin saa kolme ku nlaittaa keskelle, eli saman arvoinen jos kaksi vierekkäin
+        # tai jos x..x niin jonkin arvoinen
+        # tai jos 3 ja molemmilla tyhjää niin varma voitto
+        # heuristiikka
         if symbol_count == 4:
             score += 100
         # three in a row
@@ -125,7 +195,6 @@ class Board:
         # two in a row
         elif symbol_count == 2 and empty_count == 2:
             score += 5
-
         # two in a row with empty space on either side
         if symbol_count == 2 and empty_count == 2 and (window[0] == None or window[3] == None):
             score += 3
@@ -158,6 +227,27 @@ class Board:
         return False
 
     def check_winner(self, player: Player):
+        # muuta nämä, pysty ja vaaka etenkin, tarkista viimemissän siirron mukaan, paramterina viimeinen siirto, tarkista vaan yksi siirto
+        # gorizontal vaan sillä rivillä, tarkista niin lähde vasemmalta niin kauan kunnes tulee pelaajan merkki
+        # ja laske oikealle niin kauan kun tulee sama merkki, while silmukka, kasvata laskuria, merkki ja sarake,, osoitin muuttuja
+        # rivi on koko ajan sama missä siirto, sarake looppaa korkeintaan 6
+        # pystysoraan vain se sarake jossa siirto tehtiin ja rivi vaihtuu, etsitään se missä sama merkki ja laskuri yhteen ja jatketaan
+        # looppi yhdestä eteenpäin, tarkistaa ruudun arvoa
+        # indeksi < 6 ja niin kasvata indeksilaskuria
+        # vinosuunnat, vasen->oikea tarkastetaan kyseinen vinorivi, vähennetään pienempi indeksi mini x y, vähennetään mini indeksesitä
+        # k on laskurin muuttuja, joka laskee alaspäin, etsitään ensin merkki ja niin kauan kun sitä löytyy ja ei mennä yli rajan
+        # i = x - min(x,y)
+        # j = y - min(6-x, y)
+        #  k = 0 k looppaa 0 eteenpäin
+        # tutkin ruutuja [i+k][j+k]
+        # eka varmasti löytyy, kun jatketaan varmista ettei mene yli laudan
+        # i +k < 6 ehto ei mene yli
+        # oikea -> vasen, i = x + min(6-x,y) ja j = y - min(x,y)
+        # [i-k][j+k]
+        # alphabeta helppo lisätä wikipedia ohje, alpha - ääretön ja beta plus ääretön, lisää minimax kutsuun
+        # alpha beta pitää olla isompi kuin voittoarvo eli voitto ei voi olla inf
+        #
+
         symbol = player.get_symbol()
 
         # horizontal check

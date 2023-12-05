@@ -12,7 +12,7 @@ poetry install
 ```
 Ohjelman käynnistäminen
 ```bash
-poetry run python3 connectfour/game/connect4.py
+poetry run python3 connectfour/main.py
 ```
 
 ## Ohjelman käyttö
