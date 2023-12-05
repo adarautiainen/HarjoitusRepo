@@ -242,11 +242,11 @@ PLAYER_TURN = True
 
 def main():
     board = initialize_board()
-    PLAYER_TURN = True
+    player_turn = True
     print_board(board)
 
     while not game_over(board, PLAYER_PIECE, COMPUTER_PIECE):
-        if PLAYER_TURN:
+        if player_turn:
             col = play_game()
             while col not in get_valid_locations(board):
                 col = play_game()
@@ -258,7 +258,7 @@ def main():
                 drop_piece(board, col, COMPUTER_PIECE)
 
         print_board(board)
-        PLAYER_TURN = not PLAYER_TURN
+        player_turn = not player_turn
 
     # print result
     if check_winner(board, COMPUTER_PIECE):
