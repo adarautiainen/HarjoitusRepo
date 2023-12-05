@@ -11,6 +11,20 @@ COLUMNS = 7
 
 
 def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
+    """
+    Suorittaa minimax-algoritmin alphabeta-karsinnalla.
+
+    Args:
+        :param board_array: pelilauta
+        :param depth: syvyyden rajoitus
+        :param alpha: alfan arvo
+        :param beta: betan arvo
+        :param maximizing_player: totuusarvo, joka kertoo onko vuorossa maksimoiva pelaaja
+
+    :return:
+        Tuple (column, value), jossa column on valittu sarake ja value sen arvo
+    """
+
     if depth == 0 or game_over(board_array, PLAYER_PIECE, COMPUTER_PIECE):
         if game_over(board_array, PLAYER_PIECE, COMPUTER_PIECE):
             if check_winner(board_array, COMPUTER_PIECE):
@@ -60,6 +74,15 @@ def initialize_board():
 
 
 def check_winner(board_array, piece):
+    """
+    Tarkistaa, onko annetulla pelinappulalla voitettu peli
+
+    Args:
+        :param board_array: pelilauta
+        :param piece: pelajaan pelinappula
+    :return:
+        totuusarvo, joka kertoo onko voitettu
+    """
     # Check horizontal locations
     for c in range(COLUMNS - 3):
         for r in range(ROWS):
@@ -127,6 +150,14 @@ def drop_piece(board_array, col, piece):
 
 
 def get_valid_locations(board_array):
+    """
+    Etsii ja palauttaa listan sarakkeista joihin pelinappula voidaan pudottaa
+
+    Args:
+        :param board_array: pelilauta
+    :return:
+        Lista indekseistä, joihin pelinappula voidaan pudottaa
+    """
     valid_locations = []
     for col in range(COLUMNS):
         if is_valid_drop(board_array, col):
