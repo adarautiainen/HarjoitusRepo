@@ -55,6 +55,10 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
         return column, value
 
 
+def initialize_board():
+    return [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
+
+
 def check_winner(board_array, piece):
     # Check horizontal locations
     for c in range(COLUMNS - 3):
@@ -103,7 +107,7 @@ def game_over(board_array, player_piece, computer_piece):
 
 
 def is_valid_drop(board_array, col):
-    return board_array[0][col] is EMPTY_PIECE
+    return board_array[0][col] == EMPTY_PIECE
 
 
 def get_next_open_row(board_array, col):
@@ -130,26 +134,23 @@ def get_valid_locations(board_array):
     return valid_locations
 
 
-def print_board(board_array, rows, columns):
+def print_board(board_array):
     s = ""
-    for row in range(rows):
-        for col in range(columns):
-            if board_array[row][col] == EMPTY_PIECE:
+    for row in board_array:
+        for cell in row:
+            if cell == EMPTY_PIECE:
                 s += "-" + " "
-            elif board_array[row][col] == PLAYER_PIECE:
-                s += "\033[32m" + board_array[row][col] + " " + "\033[0m"
+            elif cell == PLAYER_PIECE:
+                s += "\033[32m" + cell + " " + "\033[0m"
             else:
-                s += "\033[31m" + board_array[row][col] + " " + "\033[0m"
+                s += "\033[31m" + cell + " " + "\033[0m"
         s += "\n"
-
-    for i in range(1, columns + 1):
+    for i in range(1, COLUMNS + 1):
         s += str(i) + " "
     s += "\n"
-
     print(s)
 
 
-# ai
 def evaluate_window(window, piece):
     score = 0
     opp_piece = PLAYER_PIECE if piece == COMPUTER_PIECE else COMPUTER_PIECE
@@ -226,8 +227,6 @@ def evaluate(board_array, piece):
 def play_game():
     while True:
         try:
-            if game_over(board, PLAYER_PIECE, COMPUTER_PIECE):
-                return
             col = int(input("Select column to drop (1-{}): ".format(COLUMNS)))
             if 1 <= col <= COLUMNS:
                 return col - 1  # match the 0-based indexing of the board_array
@@ -240,27 +239,35 @@ def play_game():
 board = [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
 PLAYER_TURN = True
 
-print_board(board, ROWS, COLUMNS)
-while not game_over(board, PLAYER_PIECE, COMPUTER_PIECE):
-    if PLAYER_TURN:
-        col = play_game()
-        while is_valid_drop(board, col) is False:
+
+def main():
+    board = initialize_board()
+    PLAYER_TURN = True
+    print_board(board)
+
+    while not game_over(board, PLAYER_PIECE, COMPUTER_PIECE):
+        if PLAYER_TURN:
             col = play_game()
-        drop_piece(board, col, PLAYER_PIECE)
+            while col not in get_valid_locations(board):
+                col = play_game()
+            drop_piece(board, col, PLAYER_PIECE)
+        else:
+            col, _ = minimax_with_alphabeta(board, 6, -math.inf, math.inf, True)
+            print("Computer drops", col)
+            if is_valid_drop(board, col):
+                drop_piece(board, col, COMPUTER_PIECE)
+
+        print_board(board)
+        PLAYER_TURN = not PLAYER_TURN
+
+    # print result
+    if check_winner(board, COMPUTER_PIECE):
+        print("Computer wins!")
+    elif check_winner(board, PLAYER_PIECE):
+        print("Player wins!")
     else:
-        col, _ = minimax_with_alphabeta(board, 6, -math.inf, math.inf, True)
-        print("Computer drops", col)
-        if is_valid_drop(board, col):
-            drop_piece(board, col, COMPUTER_PIECE)
+        print("Draw!")
 
-    print_board(board, ROWS, COLUMNS)
 
-    PLAYER_TURN = not PLAYER_TURN
-
-# print result
-if check_winner(board, COMPUTER_PIECE):
-    print("Computer wins!")
-elif check_winner(board, PLAYER_PIECE):
-    print("Player wins!")
-else:
-    print("Draw!")
+if __name__ == "__main__":
+    main()
