@@ -6,7 +6,8 @@ Muokkasin ohjelmaa niin, että poistin pelaaja-luokan kokonaan, koska se monimut
 
 ## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
+Vaikeaa on ollut saada def evaluate_window(window, piece) toimimaan hyvin, eli minkä scoren antaa tietyissä tilanteissa, että tietokone pelaisi järkevästi.
 
 ## Mitä teen seuraavaksi?
 
-Seuraavaksi teen lisää testejä.
+Seuraavaksi teen lisää testejä ja korjaan pylint-virheitä ja kirjoitan dokumentit valmiiksi.
