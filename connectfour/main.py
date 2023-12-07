@@ -1,6 +1,6 @@
 from game.connect4 import *
 
-
+"""
 def main():
     board = initialize_board()
     PLAYER_PIECE = "X"
@@ -30,7 +30,7 @@ def main():
         print("Player wins!")
     else:
         print("Draw!")
-
+"""
 
 if __name__ == "__main__":
     main()
