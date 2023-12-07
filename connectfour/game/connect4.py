@@ -19,7 +19,8 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
         :param depth: syvyyden rajoitus
         :param alpha: alfan arvo
         :param beta: betan arvo
-        :param maximizing_player: totuusarvo, joka kertoo onko vuorossa maksimoiva pelaaja
+        :param maximizing_player: totuusarvo, joka kertoo
+         onko vuorossa maksimoiva pelaaja
 
     :return:
         Tuple (column, value), jossa column on valittu sarake ja value sen arvo
@@ -28,16 +29,16 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
     if depth == 0 or game_over(board_array, PLAYER_PIECE, COMPUTER_PIECE):
         if game_over(board_array, PLAYER_PIECE, COMPUTER_PIECE):
             if check_winner(board_array, COMPUTER_PIECE):
-                return None, math.inf
+                return None, 9999999
             if check_winner(board_array, PLAYER_PIECE):
-                return None, -math.inf
+                return None, -9999999
             # game is over, no more valid moves
             return None, 0
         # depth is zero
         return None, evaluate(board_array, COMPUTER_PIECE)
 
     if maximizing_player:
-        value = -math.inf
+        value = -9999999
         column = random.choice(get_valid_locations(board_array))
         for col in get_valid_locations(board_array):
             b_copy = deepcopy(board_array)
@@ -53,7 +54,7 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
         return column, value
 
     else:
-        value = math.inf
+        value = 9999999
         column = random.choice(get_valid_locations(board_array))
         for col in get_valid_locations(board_array):
             b_copy = deepcopy(board_array)
@@ -144,7 +145,6 @@ def drop_piece(board_array, col, piece):
         print("Tried invalid drop at column", col)
         sys.exit(0)
 
-    # Loop ROWS from bottom of the board_array (self.board_size-1) to 0
     row = get_next_open_row(board_array, col)
     board_array[row][col] = piece
 
@@ -217,8 +217,8 @@ def evaluate_window(window, piece):
         score -= 4
 
     # bonus for central column presence
-    if window[1] == piece or window[2] == piece:
-        score += 2
+    #if window[1] == piece or window[2] == piece:
+        #score += 2
 
     return score
 
@@ -283,8 +283,8 @@ def main():
                 col = play_game()
             drop_piece(board, col, PLAYER_PIECE)
         else:
-            col, _ = minimax_with_alphabeta(board, 6, -math.inf, math.inf, True)
-            print("Computer drops", col)
+            col, _ = minimax_with_alphabeta(board, 5, -math.inf, math.inf, True)
+            print("Computer drops", col + 1)
             if is_valid_drop(board, col):
                 drop_piece(board, col, COMPUTER_PIECE)
 

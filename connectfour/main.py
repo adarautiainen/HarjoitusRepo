@@ -1,8 +1,8 @@
-from game.connect4 import play_game
+from game.connect4 import *
 
 
 def main():
-    play_game()
+    pass
 
 
 if __name__ == "__main__":

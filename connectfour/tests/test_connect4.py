@@ -3,7 +3,7 @@ import unittest
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,
-    evaluate_window, evaluate, play_game, print_board)
+    evaluate_window, evaluate)
 
 
 class TestConnectFour(unittest.TestCase):
@@ -22,13 +22,27 @@ class TestConnectFour(unittest.TestCase):
         for row in board:
             self.assertTrue(all(cell == self.empty_piece for cell in row))
 
-    """
-    def test_is_valid_drop(self):
-        board = initialize_board()
-        self.assertTrue(is_valid_drop(board, 0))
-        drop_piece(board, 0, self.player_piece)
+    def test_is_valid_drop_non_empty(self):
+        board = [
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+        ]
         self.assertFalse(is_valid_drop(board, 0))
-    """
+
+    def test_is_valid_drop_empty(self):
+        board = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+        ]
+        self.assertTrue(is_valid_drop(board, 0))
 
     def test_check_winner_horizontal(self):
         board = [
@@ -196,12 +210,57 @@ class TestConnectFour(unittest.TestCase):
         expected_valid_locations = []
         self.assertEqual(valid_locations, expected_valid_locations)
 
-    """
+    def test_minimax_with_alphabeta(self):
+        board = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+        ]
+        depth = 5
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+
+        col, value = minimax_with_alphabeta(board, depth, alpha, beta, maximizing_player)
+
+        self.assertIsNotNone(col)
+        self.assertIsInstance(value, int)
+        self.assertTrue(alpha <= value <= beta)
+
     def test_evaluate_window_four_in_a_row(self):
-        window = [self.player_piece, self.player_piece, self.player_piece, self.player_piece]
-        score = evaluate_window(window, self.player_piece)
+        window = ["X", "X", "X", "X"]
+        piece = "X"
+        score = evaluate_window(window, piece)
         self.assertEqual(score, 100)
+
+    def test_evaluate_window_three_in_a_row(self):
+        window = ["X", "X", "X", " "]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, 10)
+
     """
+    def test_evaluate_window_two_in_a_row(self):
+        window = ["X", "X", " ", " "]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, 5)
+    """
+
+    def test_evaluate_window_opponent_three_in_a_row(self):
+        window = ["O", "O", "O", " "]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, -8)
+
+    def test_evaluate_window_opponent_two_in_a_row(self):
+        window = ["O", "O", " ", " "]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, -4)
 
 
 if __name__ == '__main__':
