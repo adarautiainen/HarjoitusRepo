@@ -1,5 +1,6 @@
 import math
 import unittest
+from connectfour.game import connect4
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,

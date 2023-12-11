@@ -267,9 +267,8 @@ def play_game():
             print("Invalid input!")
 
 
-board = [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
-PLAYER_TURN = True
-
+#board = [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
+#PLAYER_TURN = True
 
 def main():
     board = initialize_board()
