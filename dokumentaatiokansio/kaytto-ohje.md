@@ -4,7 +4,7 @@
 
 Ohjelman lataaminen
 ```bash
-git clone git@github.com:adarautiainen/HarjoitusRepo.git
+git clone git@github.com:adarautiainen/connectfour-game.git
 ```
 Riippuvuuksien asentaminen
 ```bash
@@ -17,4 +17,4 @@ poetry run python3 connectfour/game/connect4.py
 
 ## Ohjelman käyttö
 
-- Ohjelma hyväksyy käyttäjän syötteenä numerot 1-7
+- Ohjelma pyytää käyttäjältä syötteen eli kolumnin, johon käyttäjä haluaa pelimerkin sijoittaa. Ohjelma hyväksyy käyttäjän syötteenä numerot 1-7.
