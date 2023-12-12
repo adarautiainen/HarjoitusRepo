@@ -21,7 +21,4 @@ Projekti on tehty Helsingin yliopiston kurssille Algoritmit ja tekoäly.
 ## Testauskattavuus
 
 ![workflow badge](https://github.com/adarautiainen/HarjoitusRepo/workflows/CI/badge.svg)
-[![codecov](https://codecov.io/gh/adarautiainen/HarjoitusRepo/graph/badge.svg?token=E2DAFQIX29)](https://codecov.io/gh/adarautiainen/HarjoitusRepo)
-
-
-
+[![codecov](https://codecov.io/gh/adarautiainen/connectfour-game/graph/badge.svg?token=E2DAFQIX29)](https://codecov.io/gh/adarautiainen/connectfour-game)
