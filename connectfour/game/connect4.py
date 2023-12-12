@@ -82,12 +82,12 @@ def check_winner(board_array, piece):
         :param board_array: pelilauta
         :param piece: pelajaan pelinappula
     :return:
-        totuusarvo, joka kertoo onko voitettu
+        #totuusarvo, joka kertoo onko voitettu
     """
     # Check horizontal locations
     for c in range(COLUMNS - 3):
         for r in range(ROWS):
-            if board_array[r][c] == piece and board_array[r][c + 1]\
+            if board_array[r][c] == piece and board_array[r][c + 1] \
                     == piece and board_array[r][c + 2] == piece and \
                     board_array[r][c + 3] == piece:
                 return True
@@ -95,7 +95,7 @@ def check_winner(board_array, piece):
     # Check vertical locations
     for c in range(COLUMNS):
         for r in range(ROWS - 3):
-            if board_array[r][c] == piece and board_array[r + 1][c]\
+            if board_array[r][c] == piece and board_array[r + 1][c] \
                     == piece and board_array[r + 2][c] == piece and \
                     board_array[r + 3][c] == piece:
                 return True
@@ -103,17 +103,17 @@ def check_winner(board_array, piece):
     # Check positively sloped diagonals
     for c in range(COLUMNS - 3):
         for r in range(ROWS - 3):
-            if board_array[r][c] == piece and board_array[r + 1][c + 1]\
+            if board_array[r][c] == piece and board_array[r + 1][c + 1] \
                     == piece and board_array[r + 2][
-                c + 2] == piece and board_array[r + 3][c + 3] == piece:
+                    c + 2] == piece and board_array[r + 3][c + 3] == piece:
                 return True
 
     # Check negatively sloped diagonals
     for c in range(COLUMNS - 3):
         for r in range(3, ROWS):
-            if board_array[r][c] == piece and board_array[r - 1][c + 1]\
+            if board_array[r][c] == piece and board_array[r - 1][c + 1] \
                     == piece and board_array[r - 2][
-                c + 2] == piece and board_array[r - 3][c + 3] == piece:
+                    c + 2] == piece and board_array[r - 3][c + 3] == piece:
                 return True
 
     return False
@@ -154,9 +154,9 @@ def get_valid_locations(board_array):
     Etsii ja palauttaa listan sarakkeista joihin pelinappula voidaan pudottaa
 
     Args:
-        :param board_array: pelilauta
+        #:param board_array: pelilauta
     :return:
-        Lista indekseistä, joihin pelinappula voidaan pudottaa
+        #Lista indekseistä, joihin pelinappula voidaan pudottaa
     """
     valid_locations = []
     for col in range(COLUMNS):
@@ -183,6 +183,17 @@ def print_board(board_array):
 
 
 def evaluate_window(window, piece):
+    """
+    Arvio peliruudukon ikkunan pisteytyksen annetulle pelaajalle
+
+    Args:
+        :param window: listassa neljä peräkkäistä peliruutua
+        :param piece: pelaajan pelimerkki
+
+    :return:
+        int: pistetytys arvioituun ikkunaan
+    """
+
     score = 0
     opp_piece = PLAYER_PIECE if piece == COMPUTER_PIECE else COMPUTER_PIECE
     empty = EMPTY_PIECE
@@ -204,8 +215,8 @@ def evaluate_window(window, piece):
         score += 5
 
     # two in a row with an empty space on either side
-    if piece_count == 2 and empty_count == 2\
-            and (window[0] == empty or window[3] == empty):
+    if piece_count == 2 and empty_count == 2 and\
+            empty in (window[0], window[3]):
         score += 3
 
     # penalty if opponent has three in a row with one empty
@@ -217,18 +228,29 @@ def evaluate_window(window, piece):
         score -= 4
 
     # bonus for central column presence
-    #if window[1] == piece or window[2] == piece:
-        #score += 2
+    # if window[1] == piece or window[2] == piece:
+    # score += 2
 
     return score
 
 
 def evaluate(board_array, piece):
+    """
+    Arvio peliruudukon pisteytyksen annetulle pelaajalle
+
+    Args:
+        :param board_array: peliruudukko, kaksiulotteinen lista
+        :param piece: pelaajan pelimerkki
+
+    :return:
+        int: peliruudukon kokonaispisteytys
+    """
+
     score = 0
 
     # Score Horizontal
     for r in range(ROWS):
-        row_array = [i for i in board_array[r]]
+        row_array = list(board_array[r])
         for c in range(COLUMNS - 3):
             window = row_array[c:c + 4]
             score += evaluate_window(window, piece)
@@ -258,17 +280,14 @@ def evaluate(board_array, piece):
 def play_game():
     while True:
         try:
-            col = int(input("Select column to drop (1-{}): ".format(COLUMNS)))
+            col = int(input(f"Select column to drop (1-{COLUMNS}): "))
             if 1 <= col <= COLUMNS:
                 return col - 1  # match the 0-based indexing of the board_array
             else:
-                print("Please enter a number between 1 and {}.".format(COLUMNS))
+                print(f"Please enter a number between 1 and {COLUMNS}.")
         except ValueError:
             print("Invalid input!")
 
-
-#board = [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
-#PLAYER_TURN = True
 
 def main():
     board = initialize_board()

@@ -1,6 +1,5 @@
 import math
 import unittest
-from connectfour.game import connect4
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,
@@ -87,7 +86,8 @@ class TestConnectFour(unittest.TestCase):
              self.empty_piece],
             [self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece,
              self.empty_piece],
-            [self.empty_piece, self.empty_piece, self.player_piece, self.empty_piece, self.empty_piece, self.empty_piece,
+            [self.empty_piece, self.empty_piece, self.player_piece, self.empty_piece, self.empty_piece,
+             self.empty_piece,
              self.empty_piece],
             [self.empty_piece, self.empty_piece, self.empty_piece, self.player_piece, self.empty_piece,
              self.empty_piece, self.empty_piece],
@@ -105,7 +105,8 @@ class TestConnectFour(unittest.TestCase):
              self.empty_piece],
             [self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece,
              self.empty_piece],
-            [self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.player_piece, self.empty_piece,
+            [self.empty_piece, self.empty_piece, self.empty_piece, self.empty_piece, self.player_piece,
+             self.empty_piece,
              self.empty_piece],
             [self.empty_piece, self.empty_piece, self.empty_piece, self.player_piece, self.empty_piece,
              self.empty_piece, self.empty_piece],
@@ -212,24 +213,118 @@ class TestConnectFour(unittest.TestCase):
         self.assertEqual(valid_locations, expected_valid_locations)
 
     def test_minimax_with_alphabeta(self):
-        board = [
-            [" ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " "],
-        ]
+        board = initialize_board()
         depth = 5
         alpha = -math.inf
         beta = math.inf
         maximizing_player = True
-
         col, value = minimax_with_alphabeta(board, depth, alpha, beta, maximizing_player)
 
         self.assertIsNotNone(col)
         self.assertIsInstance(value, int)
         self.assertTrue(alpha <= value <= beta)
+
+    def test_minimax_with_alphabeta_winning(self):
+        board_max = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["O", " ", " ", " ", " ", " ", " "],
+            ["O", " ", " ", " ", " ", " ", " "],
+            ["O", " ", " ", " ", " ", " ", " "]
+        ]
+        depth = 5
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board_max, depth, alpha, beta, maximizing_player)
+
+        self.assertEqual(col, 0)  # maximizing player should choose column 0 to win
+        self.assertEqual(value, 9999999)  # value of winning move
+
+        board_min = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "],
+            ["X", " ", " ", " ", " ", " ", " "]
+        ]
+        maximizing_player = False
+        col_min, value_min = minimax_with_alphabeta(board_min, depth, alpha, beta, maximizing_player)
+
+        self.assertEqual(col_min, 0)
+        self.assertEqual(value_min, -9999999)
+
+    def test_minimax_with_alphabeta_blocking(self):
+        board_max = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["X", "X", "X", " ", " ", " ", " "]
+        ]
+        depth = 5
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board_max, depth, alpha, beta,
+                                            maximizing_player)
+        self.assertEqual(col, 3)
+        self.assertNotEqual(value, 9999999)
+
+        board_min = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["O", "O", "O", " ", " ", " ", " "]
+        ]
+        maximizing_player = False
+        col_min, value_min = minimax_with_alphabeta(board_min, depth, alpha, beta,
+                                                    maximizing_player)
+
+        self.assertEqual(col_min, 3)
+        self.assertNotEqual(value_min, -9999999)
+
+    def test_minimax_with_alphabeta_draw(self):
+        board = [
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["O", "X", "O", "X", "O", "X", "O"]
+        ]
+        depth = 5
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board, depth, alpha, beta, maximizing_player)
+        self.assertIsNone(col)
+        self.assertEqual(value, 0)
+
+    def test_minimax_with_alphabeta_depth(self):
+        board = [
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["O", "X", "O", "X", "O", "X", "O"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["X", "O", "X", "O", "X", "O", "X"],
+            ["O", "X", "O", "X", "O", "X", "O"]
+        ]
+        depth = 0
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board, depth, alpha, beta,
+                                            maximizing_player)
+        expected = evaluate(board, self.computer_piece)
+
+        self.assertIsNone(col)
+        self.assertEqual(value, expected)
 
     def test_evaluate_window_four_in_a_row(self):
         window = ["X", "X", "X", "X"]
