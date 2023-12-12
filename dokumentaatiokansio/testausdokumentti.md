@@ -2,7 +2,7 @@
 
 ## Testikattavuusraportti
 
-<img width="788" alt="Screenshot 2023-11-16 at 12 18 58 PM" src="https://github.com/adarautiainen/HarjoitusRepo/assets/114645764/b19a9bb3-49b2-4405-a5c6-d7d0ec3599be">
+<img width="827" alt="Screenshot 2023-12-12 at 10 54 55 AM" src="https://github.com/adarautiainen/connectfour-game/assets/114645764/01bece58-af04-486a-9b06-53c624afdb2b">
 
 ## Mitä testattu
 
