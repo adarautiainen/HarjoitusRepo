@@ -1,9 +1,10 @@
 import math
 import unittest
+from unittest.mock import patch
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,
-    evaluate_window, evaluate)
+    evaluate_window, evaluate, play_game)
 
 
 class TestConnectFour(unittest.TestCase):
@@ -357,6 +358,16 @@ class TestConnectFour(unittest.TestCase):
         piece = "X"
         score = evaluate_window(window, piece)
         self.assertEqual(score, -4)
+
+    def test_play_game(self):
+        with patch('builtins.input', return_value="3"):
+            col = play_game()
+            self.assertEqual(col, 2) # function returns col - 1
+
+    def test_play_game_invalid(self):
+        with patch('builtins.input', side_effect=["invalid input", "4"]):
+            col = play_game()
+            self.assertEqual(col, 3)
 
 
 if __name__ == '__main__':
