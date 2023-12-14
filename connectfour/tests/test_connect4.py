@@ -339,13 +339,23 @@ class TestConnectFour(unittest.TestCase):
         score = evaluate_window(window, piece)
         self.assertEqual(score, 10)
 
-    """
     def test_evaluate_window_two_in_a_row(self):
+        window = [" ", "X", " ", "X"]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, 5)
+
+    def test_evaluate_window_two_in_a_row_next(self):
         window = ["X", "X", " ", " "]
         piece = "X"
         score = evaluate_window(window, piece)
         self.assertEqual(score, 5)
-    """
+
+    def test_evaluate_window_two_in_a_row_empty_either_side(self):
+        window = ["X", " ", " ", "X"]
+        piece = "X"
+        score = evaluate_window(window, piece)
+        self.assertEqual(score, 5)
 
     def test_evaluate_window_opponent_three_in_a_row(self):
         window = ["O", "O", "O", " "]

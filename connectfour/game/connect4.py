@@ -214,11 +214,6 @@ def evaluate_window(window, piece):
     elif piece_count == 2 and empty_count == 2:
         score += 5
 
-    # two in a row with an empty space on either side
-    if piece_count == 2 and empty_count == 2 and\
-            empty in (window[0], window[3]):
-        score += 3
-
     # penalty if opponent has three in a row with one empty
     if opp_piece_count == 3 and empty_count == 1:
         score -= 8
@@ -226,10 +221,6 @@ def evaluate_window(window, piece):
     # opponent has two in a row with two empty
     if opp_piece_count == 2 and empty_count == 2:
         score -= 4
-
-    # bonus for central column presence
-    # if window[1] == piece or window[2] == piece:
-    # score += 2
 
     return score
 
