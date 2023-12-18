@@ -4,7 +4,7 @@ from unittest.mock import patch
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,
-    evaluate_window, evaluate, play_game)
+    evaluate_window, evaluate, play_game, print_board)
 
 
 class TestConnectFour(unittest.TestCase):
@@ -327,47 +327,77 @@ class TestConnectFour(unittest.TestCase):
         self.assertIsNone(col)
         self.assertEqual(value, expected)
 
-    def test_evaluate_window_four_in_a_row(self):
-        window = ["X", "X", "X", "X"]
-        piece = "X"
+    def test_minimax_with_alphabeta_2(self):
+        board_max = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", "X", " ", "O", " ", " ", " "],
+            [" ", "X", " ", "O", " ", " ", " "],
+            [" ", "X", " ", "O", " ", " ", " "]
+        ]
+        depth = 7
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board_max, depth, alpha, beta,
+                                            maximizing_player)
+        self.assertEqual(col, 3)
+        self.assertEqual(value, 9999999)
+
+    def test_minimax_with_alphabeta_3(self):
+        board_max = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", "X", "X", "O", " ", " "],
+            ["O", "X", "X", "O", "O", "O", "X"]
+        ]
+        depth = 7
+        alpha = -math.inf
+        beta = math.inf
+        maximizing_player = True
+        col, value = minimax_with_alphabeta(board_max, depth, alpha, beta,
+                                            maximizing_player)
+        self.assertEqual(col, 4)
+        self.assertEqual(value, 340)
+
+    def test_evaluate_window_three_in_a_row(self):
+        window = ["O", "O", "O", " "]
+        piece = "O"
         score = evaluate_window(window, piece)
         self.assertEqual(score, 100)
 
-    def test_evaluate_window_three_in_a_row(self):
-        window = ["X", "X", "X", " "]
-        piece = "X"
-        score = evaluate_window(window, piece)
-        self.assertEqual(score, 10)
-
     def test_evaluate_window_two_in_a_row(self):
-        window = [" ", "X", " ", "X"]
-        piece = "X"
+        window = [" ", "O", " ", "O"]
+        piece = "O"
         score = evaluate_window(window, piece)
-        self.assertEqual(score, 5)
+        self.assertEqual(score, 50)
 
     def test_evaluate_window_two_in_a_row_next(self):
-        window = ["X", "X", " ", " "]
-        piece = "X"
+        window = ["O", "O", " ", " "]
+        piece = "O"
         score = evaluate_window(window, piece)
-        self.assertEqual(score, 5)
+        self.assertEqual(score, 50)
 
     def test_evaluate_window_two_in_a_row_empty_either_side(self):
-        window = ["X", " ", " ", "X"]
-        piece = "X"
+        window = ["O", " ", " ", "O"]
+        piece = "O"
         score = evaluate_window(window, piece)
-        self.assertEqual(score, 5)
+        self.assertEqual(score, 50)
 
     def test_evaluate_window_opponent_three_in_a_row(self):
-        window = ["O", "O", "O", " "]
-        piece = "X"
+        window = ["X", "X", "X", " "]
+        piece = "O"
         score = evaluate_window(window, piece)
-        self.assertEqual(score, -8)
+        self.assertEqual(score, -100)
 
     def test_evaluate_window_opponent_two_in_a_row(self):
-        window = ["O", "O", " ", " "]
-        piece = "X"
+        window = ["X", "X", " ", " "]
+        piece = "O"
         score = evaluate_window(window, piece)
-        self.assertEqual(score, -4)
+        self.assertEqual(score, -30)
 
     def test_play_game(self):
         with patch('builtins.input', return_value="3"):
@@ -378,6 +408,19 @@ class TestConnectFour(unittest.TestCase):
         with patch('builtins.input', side_effect=["invalid input", "4"]):
             col = play_game()
             self.assertEqual(col, 3)
+
+    def test_evaluate(self):
+        board = [
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " "],
+            ["X", "X", "X", "X", " ", " ", " "],
+        ]
+        piece = "X"
+        score = evaluate(board, piece)
+        self.assertEqual(score, 150)
 
 
 if __name__ == '__main__':

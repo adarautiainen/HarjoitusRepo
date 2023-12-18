@@ -1,5 +1,4 @@
 import math
-import random
 import sys
 from copy import deepcopy
 
@@ -39,7 +38,7 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
 
     if maximizing_player:
         value = -9999999
-        column = random.choice(get_valid_locations(board_array))
+        column = COLUMNS // 2
         for col in get_valid_locations(board_array):
             b_copy = deepcopy(board_array)
             drop_piece(b_copy, col, COMPUTER_PIECE)
@@ -55,7 +54,7 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
 
     else:
         value = 9999999
-        column = random.choice(get_valid_locations(board_array))
+        column = COLUMNS // 2
         for col in get_valid_locations(board_array):
             b_copy = deepcopy(board_array)
             drop_piece(b_copy, col, PLAYER_PIECE)
@@ -202,25 +201,21 @@ def evaluate_window(window, piece):
     opp_piece_count = window.count(opp_piece)
     empty_count = window.count(empty)
 
-    # four in a row
-    if piece_count == 4:
-        score += 100
-
     # three in a row with one empty
-    elif piece_count == 3 and empty_count == 1:
-        score += 10
+    if piece_count == 3 and empty_count == 1:
+        score += 100
 
     # two in a row with two empty
     elif piece_count == 2 and empty_count == 2:
-        score += 5
+        score += 50
 
     # penalty if opponent has three in a row with one empty
     if opp_piece_count == 3 and empty_count == 1:
-        score -= 8
+        score -= 100
 
     # opponent has two in a row with two empty
     if opp_piece_count == 2 and empty_count == 2:
-        score -= 4
+        score -= 30
 
     return score
 
@@ -241,7 +236,7 @@ def evaluate(board_array, piece):
 
     # Score Horizontal
     for r in range(ROWS):
-        row_array = list(board_array[r])
+        row_array = [i for i in board_array[r]]
         for c in range(COLUMNS - 3):
             window = row_array[c:c + 4]
             score += evaluate_window(window, piece)
@@ -292,7 +287,7 @@ def main():
                 col = play_game()
             drop_piece(board, col, PLAYER_PIECE)
         else:
-            col, _ = minimax_with_alphabeta(board, 5, -math.inf, math.inf, True)
+            col, _ = minimax_with_alphabeta(board, 7, -math.inf, math.inf, True)
             print("Computer drops", col + 1)
             if is_valid_drop(board, col):
                 drop_piece(board, col, COMPUTER_PIECE)
