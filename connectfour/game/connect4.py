@@ -1,4 +1,5 @@
 import math
+import random
 import sys
 from copy import deepcopy
 
@@ -29,20 +30,20 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
         if game_over(board_array, PLAYER_PIECE, COMPUTER_PIECE):
             if check_winner(board_array, COMPUTER_PIECE):
                 return None, 9999999
-            if check_winner(board_array, PLAYER_PIECE):
+            elif check_winner(board_array, PLAYER_PIECE):
                 return None, -9999999
-            # game is over, no more valid moves
-            return None, 0
-        # depth is zero
-        return None, evaluate(board_array, COMPUTER_PIECE)
+            else: # game is over, no more valid moves
+                return None, 0
+        else: # depth is zero
+            return None, evaluate(board_array, COMPUTER_PIECE)
 
     if maximizing_player:
         value = -9999999
-        column = COLUMNS // 2
+        column = random.choice(get_valid_locations(board_array))
         for col in get_valid_locations(board_array):
-            b_copy = deepcopy(board_array)
-            drop_piece(b_copy, col, COMPUTER_PIECE)
-            new_score = minimax_with_alphabeta(b_copy,
+            board_copy = deepcopy(board_array)
+            drop_piece(board_copy, col, COMPUTER_PIECE)
+            new_score = minimax_with_alphabeta(board_copy,
                                                depth - 1, alpha, beta, False)[1]
             if new_score > value:
                 value = new_score
@@ -54,11 +55,11 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
 
     else:
         value = 9999999
-        column = COLUMNS // 2
+        column = random.choice(get_valid_locations(board_array))
         for col in get_valid_locations(board_array):
-            b_copy = deepcopy(board_array)
-            drop_piece(b_copy, col, PLAYER_PIECE)
-            new_score = minimax_with_alphabeta(b_copy,
+            board_copy = deepcopy(board_array)
+            drop_piece(board_copy, col, PLAYER_PIECE)
+            new_score = minimax_with_alphabeta(board_copy,
                                                depth - 1, alpha, beta, True)[1]
             if new_score < value:
                 value = new_score
@@ -70,7 +71,7 @@ def minimax_with_alphabeta(board_array, depth, alpha, beta, maximizing_player):
 
 
 def initialize_board():
-    return [[EMPTY_PIECE for _ in range(COLUMNS)] for _ in range(ROWS)]
+    return [[EMPTY_PIECE] * COLUMNS for _ in range(ROWS)]
 
 
 def check_winner(board_array, piece):
@@ -130,7 +131,7 @@ def game_over(board_array, player_piece, computer_piece):
 
 
 def is_valid_drop(board_array, col):
-    return board_array[0][col] == EMPTY_PIECE
+    return board_array[0][col] is EMPTY_PIECE
 
 
 def get_next_open_row(board_array, col):
@@ -209,11 +210,10 @@ def evaluate_window(window, piece):
     elif piece_count == 2 and empty_count == 2:
         score += 50
 
-    # penalty if opponent has three in a row with one empty
+    # opponent has three in a row with one empty
     if opp_piece_count == 3 and empty_count == 1:
         score -= 100
 
-    # opponent has two in a row with two empty
     if opp_piece_count == 2 and empty_count == 2:
         score -= 30
 
@@ -233,6 +233,10 @@ def evaluate(board_array, piece):
     """
 
     score = 0
+    center_col = COLUMNS // 2
+    center_array = [row[center_col] for row in board_array]
+    center_count = center_array.count(piece)
+    score += center_count * 3
 
     # Score Horizontal
     for r in range(ROWS):
@@ -287,8 +291,8 @@ def main():
                 col = play_game()
             drop_piece(board, col, PLAYER_PIECE)
         else:
-            col, _ = minimax_with_alphabeta(board, 7, -math.inf, math.inf, True)
-            print("Computer drops", col + 1)
+            col, value = minimax_with_alphabeta(board, 7, -math.inf, math.inf, True)
+            print(f"Computer drops {col + 1}")
             if is_valid_drop(board, col):
                 drop_piece(board, col, COMPUTER_PIECE)
 
