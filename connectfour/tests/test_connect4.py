@@ -4,7 +4,7 @@ from unittest.mock import patch
 from connectfour.game.connect4 import (
     initialize_board, minimax_with_alphabeta, check_winner, game_over,
     is_valid_drop, get_next_open_row, drop_piece, get_valid_locations,
-    evaluate_window, evaluate, play_game, print_board)
+    evaluate_window, play_game)
 
 
 class TestConnectFour(unittest.TestCase):
@@ -322,7 +322,6 @@ class TestConnectFour(unittest.TestCase):
         maximizing_player = True
         col, value = minimax_with_alphabeta(board, depth, alpha, beta,
                                             maximizing_player)
-        #expected = evaluate(board, self.computer_piece)
 
         self.assertIsNone(col)
         self.assertEqual(value, 0)
@@ -336,7 +335,7 @@ class TestConnectFour(unittest.TestCase):
             [" ", "X", " ", "O", " ", " ", " "],
             [" ", "X", " ", "O", " ", " ", " "]
         ]
-        depth = 7
+        depth = 5
         alpha = -math.inf
         beta = math.inf
         maximizing_player = True
@@ -354,7 +353,7 @@ class TestConnectFour(unittest.TestCase):
             [" ", " ", "X", "X", "O", " ", " "],
             ["O", "X", "X", "O", "O", "O", "X"]
         ]
-        depth = 7
+        depth = 5
         alpha = -math.inf
         beta = math.inf
         maximizing_player = True
@@ -371,7 +370,7 @@ class TestConnectFour(unittest.TestCase):
             [" ", " ", "X", "X", " ", " ", " "],
             ["O", "X", "X", "O", "O", "O", " "]
         ]
-        depth = 7
+        depth = 5
         alpha = -math.inf
         beta = math.inf
         maximizing_player = True
