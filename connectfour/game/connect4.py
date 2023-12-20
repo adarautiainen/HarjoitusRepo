@@ -291,7 +291,7 @@ def main():
                 col = play_game()
             drop_piece(board, col, PLAYER_PIECE)
         else:
-            col = minimax_with_alphabeta(board, 7,
+            col, _ = minimax_with_alphabeta(board, 7,
                                                 -math.inf, math.inf, True)
             print(f"Computer drops {col + 1}")
             if is_valid_drop(board, col):
