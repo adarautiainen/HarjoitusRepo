@@ -6,4 +6,4 @@
 
 ## Mitä testattu
 
-Yksikkötesteillä testattu connect4.py tiedoston funktioita. Funktioista ei ole testattu kaikkia, esimerkiksi print_board jäi testaamatta, koska sen testaaminen yksikkötesteillä oli vaikeaa. 
+Yksikkötesteillä testattu connect4.py tiedoston funktioita. Funktioista ei ole testattu kaikkia, esimerkiksi print_board jäi testaamatta, koska sen testaaminen yksikkötesteillä oli vaikeaa. Testasin funktioita aina muutamilla erilaisilla pelitilanteilla.
